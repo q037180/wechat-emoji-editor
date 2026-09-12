@@ -1,0 +1,767 @@
+@use '@/styles/variables.scss' as *;
+
+.page {
+  min-height: 100vh;
+  background: $color-bg-page-gradient;
+  padding: 0 $page-padding 40rpx;
+  box-sizing: border-box;
+}
+
+// ---------- 头部 ----------
+.header {
+  padding: 32rpx 0 24rpx;
+}
+
+.title {
+  display: block;
+  font-size: $font-size-xxl;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
+}
+
+.subtitle {
+  display: block;
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  margin-top: 8rpx;
+}
+
+// ---------- 画布 ----------
+.canvasCard {
+  position: relative;
+  width: 100%;
+  border-radius: $radius-xl;
+  background-color: $color-bg-card;
+  padding: 16rpx;
+  box-sizing: border-box;
+  box-shadow: $shadow-card;
+  margin-bottom: $spacing-md;
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  border-radius: $radius-lg;
+  background-color: #faf6f1;
+}
+
+.canvasHint {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  @include flex-center;
+  flex-direction: column;
+  pointer-events: none;
+}
+
+.canvasHintIcon {
+  font-size: 88rpx;
+  margin-bottom: 16rpx;
+}
+
+.canvasHintText {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+}
+
+.dragTip {
+  position: absolute;
+  left: 50%;
+  bottom: 36rpx;
+  transform: translateX(-50%);
+  background-color: rgba(29, 33, 41, 0.72);
+  color: $color-text-white;
+  font-size: $font-size-xs;
+  padding: 10rpx 24rpx;
+  border-radius: $radius-round;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+// ---------- 工具页签 ----------
+.toolTabs {
+  display: flex;
+  gap: 12rpx;
+  margin-bottom: $spacing-md;
+}
+
+.toolTab {
+  flex: 1;
+  height: 88rpx;
+  @include flex-center;
+  border-radius: $radius-md;
+  background-color: rgba(255, 255, 255, 0.85);
+  box-shadow: $shadow-card;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  transition: all $transition-fast;
+  flex-direction: column;
+  gap: 2rpx;
+
+  &:active {
+    opacity: 0.85;
+  }
+}
+
+.toolTabActive {
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  color: $color-text-white;
+  font-weight: $font-weight-medium;
+}
+
+.toolTabIcon {
+  font-size: 32rpx;
+  line-height: 1;
+}
+
+// ---------- 工具卡 ----------
+.toolCard {
+  background-color: $color-bg-card;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-card;
+  padding: 28rpx 32rpx;
+  margin-bottom: $spacing-md;
+}
+
+.toolHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+
+.toolTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.toolBadge {
+  font-size: $font-size-xs;
+  color: $color-chip-text;
+  background-color: $color-bg-chip;
+  padding: 6rpx 16rpx;
+  border-radius: $radius-xs;
+}
+
+.toggleBtn {
+  min-width: 128rpx;
+  height: 56rpx;
+  padding: 0 24rpx;
+  @include flex-center;
+  border-radius: $radius-round;
+  border: 1rpx solid $color-primary;
+  background-color: transparent;
+  font-size: $font-size-sm;
+  color: $color-primary;
+  transition: all $transition-fast;
+  white-space: nowrap;
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.toggleBtnOn {
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  border-color: transparent;
+  color: $color-text-white;
+}
+
+.toggleText {
+  font-size: $font-size-sm;
+}
+
+.textInput {
+  width: 100%;
+  height: 80rpx;
+  background-color: $color-bg-page;
+  border-radius: $radius-md;
+  padding: 0 24rpx;
+  box-sizing: border-box;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  margin-bottom: 20rpx;
+}
+
+// ---------- 部件页签 + 选项 ----------
+.partTabs {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 20rpx;
+  flex-wrap: wrap;
+}
+
+.partTab {
+  height: 56rpx;
+  padding: 0 22rpx;
+  @include flex-center;
+  border-radius: $radius-round;
+  background-color: $color-bg-page;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  transition: all $transition-fast;
+  white-space: nowrap;
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.partTabActive {
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  color: $color-text-white;
+  font-weight: $font-weight-medium;
+}
+
+.partGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-bottom: 20rpx;
+}
+
+.partCard {
+  width: calc((100% - 64rpx) / 5);
+  @include flex-center;
+  flex-direction: column;
+  padding: 14rpx 0 10rpx;
+  border-radius: $radius-md;
+  background-color: $color-bg-page;
+  border: 2rpx solid transparent;
+  box-sizing: border-box;
+  transition: all $transition-fast;
+
+  &:active {
+    transform: scale(0.94);
+  }
+}
+
+.partIcon {
+  font-size: 40rpx;
+  line-height: 1.2;
+}
+
+.partLabel {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  margin-top: 4rpx;
+}
+
+// ---------- 颜色 / 滑杆 ----------
+.colorRow {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-bottom: 16rpx;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.colorLabel {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  width: 80rpx;
+  flex-shrink: 0;
+}
+
+.colorDot {
+  width: 52rpx;
+  height: 52rpx;
+  border-radius: $radius-round;
+  border: 4rpx solid transparent;
+  box-sizing: border-box;
+  box-shadow: inset 0 0 0 1rpx rgba(0, 0, 0, 0.08);
+  transition: all $transition-fast;
+
+  &:active {
+    transform: scale(0.9);
+  }
+}
+
+.colorDotActive {
+  border-color: $color-text-primary;
+  transform: scale(1.08);
+}
+
+.sliderRow {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-bottom: 12rpx;
+}
+
+.sliderLabel {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  flex-shrink: 0;
+  width: 160rpx;
+}
+
+.slider {
+  flex: 1;
+}
+
+// 滑块外层鼠标热区：作为 flex 子项必须撑满剩余宽度，
+// 否则宽度塌缩为 0，整个进度条不可见
+.sliderBox {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+}
+
+.brushOps {
+  display: flex;
+  gap: 16rpx;
+  margin-top: 20rpx;
+}
+
+// ---------- 贴纸面板 ----------
+.stickerOps {
+  display: flex;
+  gap: 16rpx;
+  margin-bottom: 16rpx;
+}
+
+.miniBtn {
+  flex: 1;
+  height: 72rpx;
+  @include flex-center;
+  border-radius: $radius-md;
+  background-color: $color-bg-page;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  transition: all $transition-fast;
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.miniBtnActive {
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  color: $color-text-white;
+}
+
+.miniBtnDanger {
+  color: #f5222d;
+}
+
+.layerCtrl {
+  padding-top: 4rpx;
+}
+
+.layerCtrlHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16rpx;
+}
+
+.layerCtrlTitle {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.layerCtrlOps {
+  display: flex;
+  gap: 12rpx;
+}
+
+.layerOp {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  padding: 6rpx 14rpx;
+  background-color: $color-bg-page;
+  border-radius: $radius-md;
+
+  &:active {
+    opacity: 0.6;
+  }
+}
+
+.layerOpDel {
+  color: #f5222d;
+}
+
+.layerTitle {
+  display: block;
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin: 8rpx 0 12rpx;
+}
+
+// ---------- 图层列表 ----------
+.layerList {
+  background-color: $color-bg-card;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-card;
+  padding: 20rpx 24rpx;
+  margin-bottom: $spacing-md;
+}
+
+.layerListHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12rpx;
+}
+
+.layerListTitle {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.layerListToggle {
+  font-size: $font-size-xs;
+  color: $color-primary;
+  padding: 4rpx 12rpx;
+}
+
+.layerListScroll {
+  width: 100%;
+  white-space: nowrap;
+}
+
+.layerChip {
+  display: inline-flex;
+  align-items: center;
+  height: 56rpx;
+  padding: 0 18rpx;
+  margin-right: 12rpx;
+  border-radius: $radius-round;
+  background-color: $color-bg-page;
+  transition: all $transition-fast;
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.layerChipActive {
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+}
+
+.layerChipIcon {
+  font-size: 28rpx;
+  margin-right: 6rpx;
+}
+
+.layerChipLabel {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  white-space: nowrap;
+}
+
+.layerChipActive .layerChipLabel {
+  color: $color-text-white;
+}
+
+// ---------- 素材库网格 ----------
+.stickerGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  width: 100%;
+}
+
+.stickerCell {
+  width: calc((100% - 48rpx) / 5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10rpx 4rpx 8rpx;
+  box-sizing: border-box;
+  border-radius: $radius-md;
+  background-color: $color-bg-page;
+  transition: all $transition-fast;
+
+  &:active {
+    transform: scale(0.94);
+  }
+}
+
+.stickerImg {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: $radius-sm;
+  background-color: $color-bg-hover;
+}
+
+.stickerName {
+  display: block;
+  max-width: 100%;
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  margin-top: 6rpx;
+  @include text-ellipsis;
+}
+
+.toolNote {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin-top: 8rpx;
+}
+
+// ---------- GIF 面板 ----------
+.gifOps {
+  display: flex;
+  gap: 16rpx;
+  margin: 20rpx 0 16rpx;
+}
+
+.frameScroll {
+  width: 100%;
+  white-space: nowrap;
+  margin-bottom: 16rpx;
+}
+
+.frameItem {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: 128rpx;
+  margin-right: 16rpx;
+  padding: 8rpx;
+  box-sizing: border-box;
+  border-radius: $radius-md;
+  background-color: $color-bg-page;
+}
+
+.frameThumb {
+  width: 104rpx;
+  height: 104rpx;
+  border-radius: $radius-sm;
+  background-color: $color-bg-hover;
+}
+
+.frameThumbFallback {
+  width: 104rpx;
+  height: 104rpx;
+  @include flex-center;
+  border-radius: $radius-sm;
+  background-color: $color-bg-hover;
+  font-size: $font-size-lg;
+  color: $color-text-tertiary;
+}
+
+.frameIdx {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  margin: 6rpx 0 4rpx;
+}
+
+.frameOps {
+  display: flex;
+  gap: 12rpx;
+}
+
+.frameOp {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  padding: 4rpx 6rpx;
+
+  &:active {
+    opacity: 0.6;
+  }
+}
+
+.frameOpDel {
+  color: #f5222d;
+}
+
+.gifGenBtn {
+  height: 88rpx;
+  @include flex-center;
+  border-radius: $radius-button;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  margin: 20rpx 0 4rpx;
+  transition: all $transition-fast;
+
+  &:active {
+    transform: scale(0.98);
+    opacity: 0.9;
+  }
+}
+
+.gifGenText {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-white;
+}
+
+.gifPreview {
+  margin-top: 16rpx;
+}
+
+.gifPreviewImg {
+  width: 100%;
+  height: 320rpx;
+  border-radius: $radius-md;
+  background-color: $color-bg-page;
+  margin-bottom: 16rpx;
+}
+
+// ---------- 小程序端离屏捕捉画布 ----------
+.captureCanvas {
+  position: fixed;
+  left: -9999px;
+  top: 0;
+  pointer-events: none;
+}
+
+// ---------- 底部操作栏 ----------
+.bottomBar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  gap: 20rpx;
+  padding: 20rpx $page-padding;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  background-color: rgba(255, 255, 255, 0.96);
+  box-shadow: $shadow-float;
+  z-index: 10;
+}
+
+.albumBtn {
+  flex: 1;
+  height: 96rpx;
+  @include flex-center;
+  border-radius: $radius-button;
+  background-color: $color-bg-card;
+  border: 2rpx solid $color-primary;
+  transition: all $transition-fast;
+
+  &:active {
+    transform: scale(0.98);
+    opacity: 0.9;
+  }
+}
+
+.albumBtnText {
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $color-primary;
+}
+
+.saveBtn {
+  flex: 2;
+  height: 96rpx;
+  @include flex-center;
+  border-radius: $radius-button;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  transition: all $transition-fast;
+
+  &:active {
+    transform: scale(0.98);
+    opacity: 0.9;
+  }
+}
+
+.saveBtnText {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-white;
+}
+
+.btnDisabled {
+  opacity: 0.6;
+}
+
+// ---------- 操作面板 ----------
+.mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(29, 33, 41, 0.55);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.actionSheet {
+  background-color: $color-bg-card;
+  border-radius: 24rpx 24rpx 0 0;
+  padding: 24rpx 32rpx;
+  padding-bottom: calc(32rpx + env(safe-area-inset-bottom));
+}
+
+// ---------- 图层调节窗口 ----------
+.adjustSheet {
+  background-color: $color-bg-card;
+  border-radius: 24rpx 24rpx 0 0;
+  padding: 28rpx 32rpx;
+  padding-bottom: calc(40rpx + env(safe-area-inset-bottom));
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.adjustHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8rpx;
+}
+
+.adjustTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.adjustClose {
+  width: 56rpx;
+  height: 56rpx;
+  @include flex-center;
+  font-size: $font-size-md;
+  color: $color-text-tertiary;
+  border-radius: $radius-round;
+
+  &:active {
+    background-color: $color-bg-hover;
+  }
+}
+
+.actionTitle {
+  display: block;
+  text-align: center;
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  margin-bottom: 16rpx;
+}
+
+.actionItem {
+  height: 104rpx;
+  @include flex-center;
+  border-bottom: 1rpx solid $color-divider;
+  font-size: $font-size-lg;
+  color: $color-text-primary;
+  transition: all $transition-fast;
+
+  &:active {
+    background-color: $color-bg-hover;
+  }
+}
+
+.actionCancel {
+  height: 104rpx;
+  @include flex-center;
+  font-size: $font-size-lg;
+  color: $color-text-tertiary;
+
+  &:active {
+    background-color: $color-bg-hover;
+  }
+}

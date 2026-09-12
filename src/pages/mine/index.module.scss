@@ -1,0 +1,130 @@
+@use '@/styles/variables.scss' as *;
+
+.page {
+  min-height: 100vh;
+  background: $color-bg-page-gradient;
+  padding: 0 $page-padding 40rpx;
+  box-sizing: border-box;
+}
+
+// ---------- 个人卡片 ----------
+.profileCard {
+  margin-top: 32rpx;
+  background-color: $color-bg-card;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-card;
+  padding: 40rpx 32rpx;
+  display: flex;
+  align-items: center;
+  gap: 28rpx;
+}
+
+.avatar {
+  width: 128rpx;
+  height: 128rpx;
+  border-radius: $radius-round;
+  background-color: $color-bg-hover;
+  flex-shrink: 0;
+}
+
+.avatarPlaceholder {
+  @include flex-center;
+  font-size: 64rpx;
+}
+
+.profileInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.nickname {
+  display: block;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
+  margin-bottom: 8rpx;
+  @include text-ellipsis;
+}
+
+.openidTip {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+// ---------- 数据统计 ----------
+.statsCard {
+  margin-top: 24rpx;
+  background-color: $color-bg-card;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-card;
+  padding: 28rpx 0;
+  display: flex;
+}
+
+.statItem {
+  flex: 1;
+  @include flex-center;
+  flex-direction: column;
+}
+
+.statValue {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $color-primary;
+}
+
+.statLabel {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin-top: 6rpx;
+}
+
+// ---------- 切换 Tab ----------
+.segTabs {
+  margin-top: 32rpx;
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: $radius-round;
+  padding: 6rpx;
+  box-shadow: $shadow-card;
+}
+
+.segTab {
+  flex: 1;
+  height: 64rpx;
+  @include flex-center;
+  border-radius: $radius-round;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  transition: all $transition-base;
+  white-space: nowrap;
+
+  &:active {
+    opacity: 0.85;
+  }
+}
+
+.segTabActive {
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  color: $color-text-white;
+  font-weight: $font-weight-medium;
+}
+
+// ---------- 列表 ----------
+.listWrap {
+  margin-top: 24rpx;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24rpx;
+}
+
+.gridItem {
+  width: calc((100% - 24rpx) / 2);
+}
+
+.emptyWrap {
+  margin-top: 80rpx;
+}

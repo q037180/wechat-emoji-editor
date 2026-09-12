@@ -1,0 +1,26 @@
+@use '@/styles/variables.scss' as *;
+
+.wrap {
+  @include flex-center;
+  flex-direction: column;
+  padding: 80rpx 32rpx;
+}
+
+.icon {
+  font-size: 88rpx;
+  line-height: 1.2;
+  margin-bottom: $spacing-md;
+}
+
+.title {
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $color-text-secondary;
+  margin-bottom: $spacing-xs;
+}
+
+.desc {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  text-align: center;
+}

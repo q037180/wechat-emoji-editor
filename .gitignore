@@ -1,0 +1,31 @@
+# 依赖
+node_modules/
+
+# 构建产物
+dist/
+
+# 缓存
+.swc/
+.swc-cache/
+.taro-cache/
+.temp/
+
+# IDE / 工具
+.idea/
+.vscode/
+*.swp
+
+# 微信开发者工具私有配置（含本地个人设置）
+project.private.config.json
+
+# 日志与临时文件
+*.log
+.pai/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 环境变量（如后续引入）
+.env
+.env.*
